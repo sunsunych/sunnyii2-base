@@ -18,6 +18,9 @@ RUN mkdir /etc/nginx/sites-enabled
 RUN ln -s /etc/nginx/sites-available/yii2.conf /etc/nginx/sites-enabled/yii2.conf
 COPY conf/php-fpm.conf /etc/php7/php-fpm.conf
 
+# Install node
+RUN apk add --update nodejs-npm
+
 RUN mkdir /var/log/php && \
     touch /var/log/php/error.log && \
     touch /var/log/php/access.log && \
@@ -31,8 +34,8 @@ RUN rm -rf /var/cache/apk/*
 
 RUN mkdir /app && mkdir /app/web
 RUN touch /app/web/index.php
-RUN echo "<?php phpinfo() ?>" >> /app/web/index.php
-RUN echo "done" >> /app/web/index.html
+# RUN echo "<?php phpinfo() ?>" >> /app/web/index.php
+# RUN echo "done" >> /app/web/index.html
 
 WORKDIR /app
 
